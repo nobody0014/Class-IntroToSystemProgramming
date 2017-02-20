@@ -99,7 +99,10 @@ void delete(Queue *q) {
     if (q){
         Node *tailNode = q->tail;
         Node *currentNode = q->head;
-        
+        if (currentNode->data){
+            free(currentNode->data);
+            currentNode->data = NULL;
+        }
         while(currentNode != tailNode){
             Node *previousNode = currentNode;
             currentNode = currentNode->next;
@@ -108,7 +111,6 @@ void delete(Queue *q) {
             free(previousNode);
             previousNode = NULL;
         }
-
         free(currentNode);
         currentNode = NULL;
         tailNode = NULL;
