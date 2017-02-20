@@ -64,11 +64,11 @@ char *pop(Queue *q) {
 
 void print(Queue *q) {
     if(!q){
-        printf("The queue is null\n");
+        printf("No items\n");
     }else if(q->head==NULL && q->tail==NULL ){
-        printf("The queue is empty\n");
+        printf("No items\n");
     }else{
-        printf("Words in the queue:\n");
+        // printf("Words in the queue:\n");
         Node *tailNode = q->tail;
         Node *currentNode = q->head;
 
@@ -77,12 +77,12 @@ void print(Queue *q) {
         while(currentNode != tailNode){
             //Print out the word in the node
             char *word  = currentNode->data;
-            printf("%d: %s\n", i,word);
+            printf("%s\n",word);
             //Move on to next node
             currentNode = currentNode->next;
             i++;
         }
-        printf("%d: %s\n", i,currentNode->data);
+        printf("%s\n",currentNode->data);
     }
 }
 
@@ -101,10 +101,10 @@ void delete(Queue *q) {
         Node *currentNode = q->head;
         
         while(currentNode != tailNode){
-            free(currentNode->data);
-            currentNode->data = NULL;
             Node *previousNode = currentNode;
             currentNode = currentNode->next;
+            free(currentNode->data);
+            currentNode->data = NULL;
             free(previousNode);
             previousNode = NULL;
         }
@@ -149,7 +149,7 @@ int main(int argc, char **argv)
     // pop items
     while (!isEmpty(q)) {
         char *item = pop(q);
-        printf("%s\n", item);
+        // printf("%s\n", item);
         free(item);
     }
 
