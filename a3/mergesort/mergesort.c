@@ -61,8 +61,12 @@ void merge_sort(Entry *entries, int n) {
     	}
 
     	//merg time
-    	merge_sort(L,lSize);
-    	merge_sort(R,rSize);
+        if(lSize > 1){
+            merge_sort(L,lSize);
+        }
+        if (rSize > 1){
+            merge_sort(R,rSize);
+        }
     	merge(temp,L,lSize,R,rSize);
 
     	//Copy content from temp to entries
