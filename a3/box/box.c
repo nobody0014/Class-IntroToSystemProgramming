@@ -111,8 +111,8 @@ OUTPUT:
 AVG = 4.00
 box1 size = 10
 box2 size = 1
-box1 cap = 1024
-box2 cap = 4
+box1 cap = 16
+box2 cap = 2
 -- b1
 11
 2

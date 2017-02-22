@@ -1,8 +1,0 @@
-Binomial trial 
-1) A trail with two outcomes usually called "success" and "failure"
-2) There is a fixed probability of "success" = p (1-p for failure)
-3) When we have many trails together, the probability of "success" in each trail does not change
-4) When we have N trails the probability of k successes is given by the binomial distribution bin(N,k,p)
-	-N = number of tries
-	-k = number of successes
-	-p = prob of success 
