@@ -15,12 +15,12 @@
 
 void push(Queue **q, char *word) {
     //Initialize node
-    Node *node = malloc(sizeof(node));
+    Node *node = (Node*)malloc(sizeof(Node));
     node->next = NULL;
 
     //Check the tail node, do reallocation of pointers for tail
     if(!(*q)){
-        *q = malloc(sizeof(Queue));
+        *q = (Queue*) malloc(sizeof(Queue));
         (*q)->head = node;
         (*q)->tail = node;
     }else if(!((*q)->head) && !((*q)->tail)){
@@ -34,7 +34,7 @@ void push(Queue **q, char *word) {
 
     //Copy word into node
     int word_size = strlen(word);
-    node->data = malloc(sizeof(char)*word_size);
+    node->data = (char *) malloc(sizeof(char)*word_size);
     strcpy(node->data, word);
 }
 
