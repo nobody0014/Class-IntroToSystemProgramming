@@ -132,6 +132,7 @@ Node *lookup(Node ** tree, int val) {
 Found
 Not Found
  *****************************/
+
 int main(int argc, char **argv)
 {
     Node *root = NULL;
