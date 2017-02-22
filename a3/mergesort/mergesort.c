@@ -17,11 +17,14 @@ void merge(Entry *output, Entry *L, int nL, Entry *R, int nR) {
 
     	//Check and assign (sorting)
     	//Checking Null doesnt really work so we look at the size
+        printf("i: %d, j: %d,total: %d\n", i, j, nL+nR);
     	if ((nL > i && cL->data <  cR->data) || nR <= j){
+            printf("Push in left\n");
     		cO->data = cL->data;
     		cO->name = cL->name;
     		i++;
     	}else{
+            printf("Push in right\n");
     		cO->data = cR->data;
     		cO->name = cR->name;
     		j++;
