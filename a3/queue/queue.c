@@ -32,8 +32,9 @@ void push(Queue **q, char *word) {
         (*q)->tail = node;
     }
 
-    //Copy word into node
-    node->data = strdup(word);
+    //Copy word into node, +1 is for '\0'
+    node->data = (char *) malloc(sizeof(char) * (strlen(word)+1));
+    strcpy(node->data,word);
 }
 
 char *pop(Queue *q) {

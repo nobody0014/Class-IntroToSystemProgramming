@@ -109,8 +109,9 @@ int main(void) {
     	int tmp;
     	char name[MAX_NAME_LENGTH];
     	scanf("%d %s", &tmp,name);
-    	(entries+i)->data = tmp;
-    	(entries+i)->name = strdup(name);
+        entries[i].data = tmp;
+        entries[i].name = (char *) malloc(sizeof(char) * (strlen(name)+1));
+    	strcpy(entries[i].name,name);
     }
 
     merge_sort(entries,n);
@@ -122,8 +123,8 @@ int main(void) {
 
     //Free the name first then free the entries
     for (int i = 0; i < n; ++i){
-    	free((entries+i)->name);
-    	(entries+i)->name = NULL;
+    	free((entries[i]).name);
+    	(entries[i]).name = NULL;
     }
     free(entries);
     entries = NULL;
