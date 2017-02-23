@@ -3,7 +3,7 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+// #include <string.h>
 #include "mergesort.h"
 
 void merge(Entry *output, Entry *L, int nL, Entry *R, int nR) {
@@ -89,6 +89,23 @@ void merge_sort(Entry *entries, int n) {
     }
 }
 
+int myStrlen(char *word){
+    int count = 0;
+    while(word && count <= MAX_NAME_LENGTH){
+        word++;
+        count++;
+    }
+    return count;
+}
+
+void myStrcpy(char *dest, char *src){
+    int i;
+    for (i = 0; i < myStrlen(src); ++i){
+        dest[i] = src[i];
+    }
+    dest[i] = '\0';
+}
+
 /*
 TEST: ./mergesort < test.in
 OUTPUT:
@@ -110,8 +127,8 @@ int main(void) {
     	char name[MAX_NAME_LENGTH];
     	scanf("%d %s", &tmp,name);
         entries[i].data = tmp;
-        entries[i].name = (char *) malloc(sizeof(char) * (strlen(name)+1));
-    	strcpy(entries[i].name,name);
+        entries[i].name = (char *) malloc(sizeof(char) * (MAX_NAME_LENGTH+1));
+    	myStrcpy(entries[i].name,name);
     }
 
     merge_sort(entries,n);
