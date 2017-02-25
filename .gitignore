@@ -1,3 +1,4 @@
 *.zip
 *.pdf
 relative/path/to/dir/anotherfile
+*.tar
