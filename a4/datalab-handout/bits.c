@@ -172,8 +172,6 @@ NOTES:
  *   Rating: 3
  */
 int conditional(int x, int y, int z) {
-
-  /**/
   int x_is_zero, translate;
   x_is_zero =  !!(z ^ (z + x)); //if x == 0, this is 0, otherwise 1 
   translate = (~x_is_zero)+1; 
@@ -187,7 +185,11 @@ int conditional(int x, int y, int z) {
  *   Rating: 2
  */
 int allEvenBits(int x) {
-  return 2;
+  int i = 85;
+  i = i << 8 + 85;
+  i = i << 8 + 85;
+  i = i << 8 + 85;
+  return !(i ^ x);
 }
 /* 
  * implication - return x -> y in propositional logic - 0 for false, 1
@@ -199,7 +201,7 @@ int allEvenBits(int x) {
  *   Rating: 2
  */
 int implication(int x, int y) {
-    return 2;
+    return !(x^y) | (!x^0);
 }
 /*
  * bitCount - returns count of number of 1's in word
@@ -242,7 +244,25 @@ int logicalShift(int x, int n) {
  *  Rating: 2
  */
 int byteSwap(int x, int n, int m) {
-    return 2;
+
+  //Get the n_byte area, the rest 0, also shift them to designated place
+  int n_mask = (255 << (n<<3)) & x;
+  n_mask = n_mask >> (n<<3);
+  n_mask = n_mask << (m<<3);
+
+  //Get the m_byte area, the rest 0, also shift them to designated place
+  int m_mask = (255 << (m<<3)) & x;
+  m_mask = m_mask >> (m<<3);
+  m_mask = m_mask << (n<<3);
+
+  //Empited out the n_byte area and m_byte area
+  //So these areas will be 0
+  int new_x = (x ^ n_mask) ^ m_mask;
+
+  //Just add the m_byte and n_byte to fill those area
+  int swapped_x = new_x + n_mask + m_mask;
+
+  return swapped_x;
 }
 /* 
  * leastBitPos - return a mask that marks the position of the
@@ -262,7 +282,7 @@ int leastBitPos(int x) {
  *   Rating: 1
  */
 int tmin(void) {
-  return 2;
+  return 1 << 31;
 }
 /* 
  * isLessOrEqual - if x <= y  then return 1, else return 0 
@@ -272,5 +292,7 @@ int tmin(void) {
  *   Rating: 3
  */
 int isLessOrEqual(int x, int y) {
-  return 2;
+  int is_equal = !(x^y);
+  int less_than = 0;
+  return is_equal | less_than;
 }
