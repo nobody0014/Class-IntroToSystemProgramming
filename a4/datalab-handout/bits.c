@@ -1,4 +1,4 @@
-/* 
+1/* 
  * CS:APP Data Lab 
  * 
  * <Phornphawit Manasut, 5780995>
@@ -172,7 +172,12 @@ NOTES:
  *   Rating: 3
  */
 int conditional(int x, int y, int z) {
-  return 2;
+
+  /**/
+  int x_is_zero, translate;
+  x_is_zero =  !!(z ^ (z + x)); //if x == 0, this is 0, otherwise 1 
+  translate = (~x_is_zero)+1; 
+  return (~(translate)&z) | ((translate)&y);
 }
 /* 
  * allEvenBits - return 1 if all even-numbered bits in word set to 1

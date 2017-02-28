@@ -1,0 +1,16 @@
+logical bitwise operators:
+-and (&)	
+-or (|)
+-exclusive or (^)
+-one's complement (~)
+	-unary operator
+	-complements the bits in operand
+	-reverse the bit value (u know, one's complement)
+Shift Operation
+-shift left (<<)
+	-discard most outer bit and throw 0 to the right
+	-careful with it when used with signed numbers
+-shift right (>>)
+	-same with left
+	-unsigned usually just add 0 to the left 
+	-for signed, it's depends on the programmer
