@@ -211,39 +211,51 @@ int implication(int x, int y) {
  *   Rating: 4
  */
 int bitCount(int x) {
-  int even_bit_mask = 0x55;
-  even_bit_mask = (even_bit_mask << 8) + 0x55;
-  even_bit_mask = (even_bit_mask << 8) + 0x55;
-  even_bit_mask = (even_bit_mask << 8) + 0x55;
 
-  //shift x by one to make all odd bits become even bits then mask with even bit mask
-  // printf("x: %x, x>>1: %x, mask: %x,odd_x: %x\n", x, x>>1, even_bit_mask ,(x>>1) & even_bit_mask);
-  int odd_x = (even_bit_mask & (x >> 1));
-  int even_x = even_bit_mask & x;
-  // printf("odd_x: %x, even_x: %x\n", odd_x, even_x);
+  int even_mask, odd_result, even_result, result;
 
-  int sum = odd_x + even_x;
-  // printf("sum: %x\n", sum);
+  //10 for getting the sum
+  even_mask = 0x55;
+  even_mask = (even_mask << 8) + even_mask;
+  even_mask = (even_mask << 16) + even_mask;
+  odd_result = even_mask & (x >> 1);
+  even_result = even_mask & x;
+  result = odd_result + even_result;
+
+  
+  even_mask = 0x33;
+  even_mask = (even_mask << 8) + even_mask;
+  even_mask = (even_mask << 16) + even_mask;
+  odd_result = even_mask & (result >> 2);
+  // printf("%x %x %x %x\n", result, result >> 1,result >> 2, odd_result);
+  even_result = even_mask & result;
+  // printf("result: %x even_mask: %x odd_result: %x result>>2: %x\n",result,even_mask,odd_result,result>>2);
+  result = odd_result + even_result;
+  // printf("%x\n", result);
+
+  even_mask = 0x0F;
+  even_mask = (even_mask << 8) + even_mask;
+  even_mask = (even_mask << 16) + even_mask;
+  odd_result = even_mask & (result >> 4);
+  even_result = even_mask & result;
+
+  result = odd_result + even_result;
+
+  // even_mask = 0xFF;
+  // even_mask = (even_mask << 8) + 0xFF;
+  // even_mask = (even_mask << 8) + 0xFF;
+  // even_mask = (even_mask << 8) + 0xFF;
+  // odd_result = even_mask & (result >> 8);
+  // even_result = even_mask & result;
+  // result = odd_result + even_result;
+
 
   int output = 0;
-  int two_bit_mask = 0x3;
-
-  output = output + (two_bit_mask & (sum));
-  output = output + (two_bit_mask & (sum >> 2));
-  output = output + (two_bit_mask & (sum >> 4));
-  output = output + (two_bit_mask & (sum >> 6));
-  output = output + (two_bit_mask & (sum >> 8));
-  output = output + (two_bit_mask & (sum >> 10));
-  output = output + (two_bit_mask & (sum >> 12));
-  output = output + (two_bit_mask & (sum >> 14));
-  output = output + (two_bit_mask & (sum >> 16));
-  output = output + (two_bit_mask & (sum >> 18));
-  output = output + (two_bit_mask & (sum >> 20));
-  output = output + (two_bit_mask & (sum >> 22));
-  output = output + (two_bit_mask & (sum >> 24));
-  output = output + (two_bit_mask & (sum >> 26));
-  output = output + (two_bit_mask & (sum >> 28));
-  output = output + (two_bit_mask & (sum >> 30));
+  int eight_bit_mask =  0xFF;
+  output = output + (eight_bit_mask & (result));
+  output = output + (eight_bit_mask & (result >> 8));
+  output = output + (eight_bit_mask & (result >> 16));
+  output = output + (eight_bit_mask & (result >> 24));
 
   return output;
 }
