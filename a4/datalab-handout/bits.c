@@ -1,4 +1,4 @@
-1/* 
+/* 
  * CS:APP Data Lab 
  * 
  * <Phornphawit Manasut, 5780995>
@@ -185,11 +185,11 @@ int conditional(int x, int y, int z) {
  *   Rating: 2
  */
 int allEvenBits(int x) {
-  int i = 85;
-  i = i << 8 + 85;
-  i = i << 8 + 85;
-  i = i << 8 + 85;
-  return !(i ^ x);
+  int i = 0x55;
+  i = (i << 8) + 0x55;
+  i = (i << 8) + 0x55;
+  i = (i << 8) + 0x55;
+  return !(i ^ (i & x));
 }
 /* 
  * implication - return x -> y in propositional logic - 0 for false, 1
@@ -211,7 +211,41 @@ int implication(int x, int y) {
  *   Rating: 4
  */
 int bitCount(int x) {
-  return 2;
+  int even_bit_mask = 0x55;
+  even_bit_mask = (even_bit_mask << 8) + 0x55;
+  even_bit_mask = (even_bit_mask << 8) + 0x55;
+  even_bit_mask = (even_bit_mask << 8) + 0x55;
+
+  //shift x by one to make all odd bits become even bits then mask with even bit mask
+  // printf("x: %x, x>>1: %x, mask: %x,odd_x: %x\n", x, x>>1, even_bit_mask ,(x>>1) & even_bit_mask);
+  int odd_x = (even_bit_mask & (x >> 1));
+  int even_x = even_bit_mask & x;
+  // printf("odd_x: %x, even_x: %x\n", odd_x, even_x);
+
+  int sum = odd_x + even_x;
+  // printf("sum: %x\n", sum);
+
+  int output = 0;
+  int two_bit_mask = 0x3;
+
+  output = output + (two_bit_mask & (sum));
+  output = output + (two_bit_mask & (sum >> 2));
+  output = output + (two_bit_mask & (sum >> 4));
+  output = output + (two_bit_mask & (sum >> 6));
+  output = output + (two_bit_mask & (sum >> 8));
+  output = output + (two_bit_mask & (sum >> 10));
+  output = output + (two_bit_mask & (sum >> 12));
+  output = output + (two_bit_mask & (sum >> 14));
+  output = output + (two_bit_mask & (sum >> 16));
+  output = output + (two_bit_mask & (sum >> 18));
+  output = output + (two_bit_mask & (sum >> 20));
+  output = output + (two_bit_mask & (sum >> 22));
+  output = output + (two_bit_mask & (sum >> 24));
+  output = output + (two_bit_mask & (sum >> 26));
+  output = output + (two_bit_mask & (sum >> 28));
+  output = output + (two_bit_mask & (sum >> 30));
+
+  return output;
 }
 /* 
  * bang - Compute !x without using !
@@ -221,7 +255,10 @@ int bitCount(int x) {
  *   Rating: 4 
  */
 int bang(int x) {
-  return 2;
+  int n, y;
+  n = ~x +1;
+  y  = (~(x | n)) >> 31;
+  return y & 1;
 }
 /* 
  * logicalShift - shift x to the right by n, using a logical shift
@@ -232,7 +269,25 @@ int bang(int x) {
  *   Rating: 3 
  */
 int logicalShift(int x, int n) {
-  return 2;
+  // printf("input: %x, shift: %d\n", x,n);
+  // int output, n_is_zero, mask_out_sign,left,right;
+
+  // n_is_zero = !!(x ^ (x+n));
+  // mask_out_sign = ((~n_is_zero) + 1); 
+
+  // left = ((~mask_out_sign)&x);
+
+  // right = (mask_out_sign) & (~(1 << 31));
+  // right = right >> (n + (~1 + 1));
+  // right = (x >> n) & right;
+
+  // output = left | right;
+
+  int mask, output;
+  mask = ~(((1 << 31) >> n) << 1);
+  output = x >> n;
+  output = output & mask;
+  return output;
 }
 /* 
  * byteSwap - swaps the nth byte and the mth byte
@@ -244,26 +299,29 @@ int logicalShift(int x, int n) {
  *  Rating: 2
  */
 int byteSwap(int x, int n, int m) {
-
+  int n_mask, m_mask, new_x, swapped_x;
   //Get the n_byte area, the rest 0, also shift them to designated place
-  int n_mask = (255 << (n<<3)) & x;
-  n_mask = n_mask >> (n<<3);
-  n_mask = n_mask << (m<<3);
+  n_mask = (255 << (n<<3)) & x;
 
   //Get the m_byte area, the rest 0, also shift them to designated place
-  int m_mask = (255 << (m<<3)) & x;
-  m_mask = m_mask >> (m<<3);
-  m_mask = m_mask << (n<<3);
+  m_mask = (255 << (m<<3)) & x;
+  
 
   //Empited out the n_byte area and m_byte area
   //So these areas will be 0
-  int new_x = (x ^ n_mask) ^ m_mask;
+  new_x = (x ^ n_mask) ^ m_mask;
+
+  n_mask = (n_mask >> (n<<3)) & 255;
+  n_mask = n_mask << (m<<3);
+
+  m_mask = (m_mask >> (m<<3)) & 255;
+  m_mask = m_mask << (n<<3);
 
   //Just add the m_byte and n_byte to fill those area
-  int swapped_x = new_x + n_mask + m_mask;
-
+  swapped_x = new_x | n_mask | m_mask;
   return swapped_x;
 }
+
 /* 
  * leastBitPos - return a mask that marks the position of the
  *               least significant 1 bit. If x == 0, return 0
@@ -273,7 +331,7 @@ int byteSwap(int x, int n, int m) {
  *   Rating: 2 
  */
 int leastBitPos(int x) {
-  return 2;
+  return (~x+1)&x;
 }
 /* 
  * tmin - return minimum two's complement integer 
@@ -293,6 +351,24 @@ int tmin(void) {
  */
 int isLessOrEqual(int x, int y) {
   int is_equal = !(x^y);
-  int less_than = 0;
-  return is_equal | less_than;
+
+  int x_most_sig = (x >> 31) & 1;
+  int y_most_sig = (y >> 31) & 1;
+
+  int x_negative_y_positive = (x_most_sig & !(y_most_sig));
+  int x_positive_y_negative = (!x_most_sig & y_most_sig);
+
+  int diff = (x ^ y);
+  int diff_x = x&diff;
+  int diff_y = y&diff;
+  int total_diff = (diff_x + (~diff_y+1)) >> 31;
+
+  
+  return !x_positive_y_negative & (is_equal | x_negative_y_positive | total_diff);
 }
+
+
+
+
+
+

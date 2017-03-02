@@ -1,4 +1,7 @@
-*.zip
-*.pdf
-relative/path/to/dir/anotherfile
-*.tar
+*
+!Makefile
+!*.c
+!*.h
+!*.pm
+!*.pl
+!README
