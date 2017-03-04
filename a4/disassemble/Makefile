@@ -6,4 +6,4 @@ disas.o: disas.c
 	gcc disas.c -c
 
 clean:
-	rm disas.o disasTest
+	rm disas.o dtest
