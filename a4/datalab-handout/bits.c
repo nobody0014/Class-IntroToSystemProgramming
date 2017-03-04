@@ -229,9 +229,10 @@ int bitCount(int x) {
   odd_result = even_mask & (result >> 2);
   // printf("%x %x %x %x\n", result, result >> 1,result >> 2, odd_result);
   even_result = even_mask & result;
-  // printf("result: %x even_mask: %x odd_result: %x result>>2: %x\n",result,even_mask,odd_result,result>>2);
+  printf("result: %x even_mask: %x odd_result: %x result>>2: %x\n",
+    result, even_mask, odd_result, result>>2);
   result = odd_result + even_result;
-  // printf("%x\n", result);
+  printf("::: %x\n", result);
 
   even_mask = 0x0F;
   even_mask = (even_mask << 8) + even_mask;
