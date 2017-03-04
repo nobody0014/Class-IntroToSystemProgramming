@@ -185,7 +185,8 @@ int conditional(int x, int y, int z) {
  *   Rating: 2
  */
 int allEvenBits(int x) {
-  int i = 0x55;
+  int i;
+  i = 0x55;
   i = (i << 8) + 0x55;
   i = (i << 8) + 0x55;
   i = (i << 8) + 0x55;
@@ -212,7 +213,7 @@ int implication(int x, int y) {
  */
 int bitCount(int x) {
 
-  int even_mask, odd_result, even_result, result;
+  int even_mask, odd_result, even_result, result, output, eight_bit_mask;
 
   //10 for getting the sum
   even_mask = 0x55;
@@ -247,8 +248,8 @@ int bitCount(int x) {
   // result = odd_result + even_result;
 
 
-  int output = 0;
-  int eight_bit_mask =  0xFF;
+  output = 0;
+  eight_bit_mask =  0xFF;
   output = output + (eight_bit_mask & (result));
   output = output + (eight_bit_mask & (result >> 8));
   output = output + (eight_bit_mask & (result >> 16));
@@ -358,18 +359,20 @@ int tmin(void) {
  *   Rating: 3
  */
 int isLessOrEqual(int x, int y) {
-  int is_equal = !(x^y);
+  int is_equal, x_most_sig, y_most_sig, x_negative_y_positive, x_positive_y_negative, diff, diff_y, diff_x, total_diff;
 
-  int x_most_sig = (x >> 31) & 1;
-  int y_most_sig = (y >> 31) & 1;
+  is_equal = !(x^y);
 
-  int x_negative_y_positive = (x_most_sig & !(y_most_sig));
-  int x_positive_y_negative = ((!x_most_sig) & y_most_sig);
+  x_most_sig = (x >> 31) & 1;
+  y_most_sig = (y >> 31) & 1;
 
-  int diff = (x ^ y);
-  int diff_x = x&diff;
-  int diff_y = y&diff;
-  int total_diff = (diff_x + (~diff_y+1)) >> 31;
+  x_negative_y_positive = (x_most_sig & !(y_most_sig));
+  x_positive_y_negative = ((!x_most_sig) & y_most_sig);
+
+  diff = (x ^ y);
+  diff_x = x&diff;
+  diff_y = y&diff;
+  total_diff = (diff_x + (~diff_y+1)) >> 31;
 
   
   return (!x_positive_y_negative) & (is_equal | x_negative_y_positive | total_diff);
