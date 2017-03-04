@@ -11,4 +11,8 @@
 !README
 
 .DS_Store
-*.tar
+datalab-handout.tar
+*.o
+*.pdf
+*.i
+*.zip
