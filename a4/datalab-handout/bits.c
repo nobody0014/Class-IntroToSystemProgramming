@@ -227,12 +227,8 @@ int bitCount(int x) {
   even_mask = (even_mask << 8) + even_mask;
   even_mask = (even_mask << 16) + even_mask;
   odd_result = even_mask & (result >> 2);
-  // printf("%x %x %x %x\n", result, result >> 1,result >> 2, odd_result);
   even_result = even_mask & result;
-  printf("result: %x even_mask: %x odd_result: %x result>>2: %x\n",
-    result, even_mask, odd_result, result>>2);
   result = odd_result + even_result;
-  printf("::: %x\n", result);
 
   even_mask = 0x0F;
   even_mask = (even_mask << 8) + even_mask;
@@ -282,7 +278,6 @@ int bang(int x) {
  *   Rating: 3 
  */
 int logicalShift(int x, int n) {
-  // printf("input: %x, shift: %d\n", x,n);
   // int output, n_is_zero, mask_out_sign,left,right;
 
   // n_is_zero = !!(x ^ (x+n));
