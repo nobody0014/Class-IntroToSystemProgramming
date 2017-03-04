@@ -1,7 +1,14 @@
+# Ignore all
 *
+
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
+
 !Makefile
-!*.c
-!*.h
-!*.pm
-!*.pl
 !README
+
+.DS_Store
+*.tar
