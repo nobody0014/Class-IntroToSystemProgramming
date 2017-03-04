@@ -201,7 +201,7 @@ int allEvenBits(int x) {
  *   Rating: 2
  */
 int implication(int x, int y) {
-    return !(x^y) | (!x^0);
+    return (!(x^y)) | (!x^0);
 }
 /*
  * bitCount - returns count of number of 1's in word
@@ -364,7 +364,7 @@ int isLessOrEqual(int x, int y) {
   int y_most_sig = (y >> 31) & 1;
 
   int x_negative_y_positive = (x_most_sig & !(y_most_sig));
-  int x_positive_y_negative = (!x_most_sig & y_most_sig);
+  int x_positive_y_negative = ((!x_most_sig) & y_most_sig);
 
   int diff = (x ^ y);
   int diff_x = x&diff;
@@ -372,7 +372,7 @@ int isLessOrEqual(int x, int y) {
   int total_diff = (diff_x + (~diff_y+1)) >> 31;
 
   
-  return !x_positive_y_negative & (is_equal | x_negative_y_positive | total_diff);
+  return (!x_positive_y_negative) & (is_equal | x_negative_y_positive | total_diff);
 }
 
 
