@@ -1,0 +1,29 @@
+for all:
+run "gdb bomb"
+break explode_bomb
+
+
+6 arguments:
+rdi
+rsi
+rdx
+rcx
+r8
+r9
+
+return rax
+
+1)
+print out the item that's being pushed into rsi before going into the string_not_equal
+rdi is the input from the main
+rsi is the item that is being compared
+if you print the rsi, you get the answer
+
+2)
+so, get first six numbers will take the array of the first six numbers of the input.
+for my bomb, they compare first 2 numbers (0 and 1) before entering a loop
+basically i have to find input that would eventually allow me to reach the same address as the 5th number.
+
+3)
+
+
