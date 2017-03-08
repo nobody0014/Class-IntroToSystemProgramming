@@ -25,5 +25,18 @@ for my bomb, they compare first 2 numbers (0 and 1) before entering a loop
 basically i have to find input that would eventually allow me to reach the same address as the 5th number.
 
 3)
+So..... you have ja is basically jg but unsinged. remember that cus it means u have to input sth lower or equal to 0x7.
+the input u put will jump u to the correct switch place where you have to put the last decimal correctly to pass. 
+ez, just remember to read and understand the command properly next time.
+the format for the input is %d %c %d, the char doesnt matter, it's not used anywhere except the first part where the program 
+wants a correct input.
 
+4)
+This is recursion hell, you dont have to totally understand func4 but here's the deal, function 4 doesnt make use of the first input decimal u put in AT ALL, it just compare them with the result of the func4 at the end, which means, you just have to get your second input decimal right and see what numbe pop up from it and let your first input be that number and u are done.
+
+5)
+Easy as pie. THe first thing they did is to check string length of your input. Then they do some mambo jumpo with each character of your input, adding them to %ecx (for my bomb) and then check ecx with 0x30 once they are done, so you just have to see what kind of value each of your char has and change the string accordingly to get 0x30 for ecx at the end.
+Becareful and dont panic, the 0x30 is in hexadecimal, meaning that your 0x28 is actually further from 0x30 than it looks.
+
+6)
 
