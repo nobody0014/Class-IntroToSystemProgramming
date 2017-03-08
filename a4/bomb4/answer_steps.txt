@@ -39,4 +39,34 @@ Easy as pie. THe first thing they did is to check string length of your input. T
 Becareful and dont panic, the 0x30 is in hexadecimal, meaning that your 0x28 is actually further from 0x30 than it looks.
 
 6)
+Okay this is confusing as fuck but bear with me.
+1st step, u will realise that it takes in 6 numbers just like phase_2.
+2nd step, the number they want is less than or equal to 6.
+3rd step, they dont want any input number to be the same.
+4th step, they do some mambo jumbo jump around with number and thats where you realise they are swapping values and such and struct.
+5th step, you have to get the value of all those nodes (the node number and its associated values)
+6th step, check out conditions they check for the last bomb.
+7th step, rearrange your inputs so that the it fits the conditions for all the loop.
+DONE!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
