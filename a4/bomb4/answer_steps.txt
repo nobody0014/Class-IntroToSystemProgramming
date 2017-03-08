@@ -48,6 +48,8 @@ Okay this is confusing as fuck but bear with me.
 6th step, check out conditions they check for the last bomb.
 7th step, rearrange your inputs so that the it fits the conditions for all the loop.
 DONE!
+The value of each node (order matters)
+97 85 e9 2c2 109 147
 
 
 
