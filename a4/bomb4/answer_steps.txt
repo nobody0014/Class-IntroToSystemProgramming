@@ -52,8 +52,12 @@ The value of each node (order matters)
 97 85 e9 2c2 109 147
 
 
-
-
+7)
+binary tree, the tree will stop when u hit the correct number or ur input hit 0.
+if it hits 0, ur shit is wrong.
+if you hit the correct number, it will rise up and + eax here and there.
+for me, eax + eax when the rdi is greter but eax + eax + 1 when rdi is lower.
+REMEMBER, eax starts at 0.
 
 
 
