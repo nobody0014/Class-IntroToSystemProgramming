@@ -107,11 +107,21 @@ void evaluate_input(int s, int E, int b, char *t, int h, int v){
 			total++;
 		}
 
+
 		if (total > 1){
 			printf("Missing required command line argument\n");
 		}else if(total == 1){
 			printf("%s\n", t);
-			printf("Options require an argument\n");
+			printf("Options require an argument -- ");
+			if(ns == 1){
+				printf("\'%c\'", 's');
+			}else if(nE == 1){
+				printf("\'%c\'", 'E');
+			}else if(nb == 1){
+				printf("\'%c\'", 'b');
+			}else if(nt == 1){
+				printf("\'%c\'", 't');
+			}
 		}
 
 		if(h != 1){
@@ -120,7 +130,6 @@ void evaluate_input(int s, int E, int b, char *t, int h, int v){
         exit(EXIT_FAILURE);
 	}
 }
-
 
 void manual_string_copy(char **t, char *optarg){
 	*t = malloc(sizeof(char) * strlen(optarg) + 1); //last byte for the trailing '\0'
