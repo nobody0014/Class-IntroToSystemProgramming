@@ -24,6 +24,35 @@ void transpose_submit(int M, int N, int A[N][M], int B[M][N])
 {
 }
 
+char transpose_blocking_desc [] = "Blocking Transpose";
+void transpose_blocking(int M, int N, int A[N][M], int B[M][N])
+{
+    /*b_size is 4 because we can only fit 4 sets of b into the cache (1 is taken by 1)*/
+    /*we are going to try to exploit the locality here*/
+    int b_size = 4;
+    int ii, jj, i, j, lim_i, lim_j, tmp;
+    for (ii = 0; ii < N; ii += b_size){
+        if (ii + b_size < N){
+            lim_i = ii+b_size;
+        }else{
+            lim_i = N;
+        }
+        for (jj = 0; jj < M; jj += b_size){
+            if (jj + b_size < M){
+                lim_j = jj+b_size;
+            }else{
+                lim_j = M;
+            }
+            for (i = ii; i < lim_i; ++i){
+                for (j = jj; j < lim_j; ++j){
+                    tmp = A[i][j];
+                    B[j][i] = tmp;
+                }
+            }
+        }
+    }
+}
+
 /* 
  * You can define additional transpose functions below. We've defined
  * a simple one below to help you get started. 
@@ -57,6 +86,9 @@ void registerFunctions()
 {
     /* Register your solution function */
     registerTransFunction(transpose_submit, transpose_submit_desc); 
+
+    /* Register the blocking technique */
+    registerTransFunction(transpose_blocking, transpose_blocking_desc);
 
     /* Register any additional transpose functions */
     registerTransFunction(trans, trans_desc); 
